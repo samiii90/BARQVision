@@ -69,6 +69,15 @@ export const HomeScreen = () => {
             CONNECT
           </Button>
 
+          <Button
+            mode="outlined"
+            style={[styles.button, styles.secondaryButton]}
+            contentStyle={styles.buttonContent}
+            labelStyle={[styles.buttonLabel, styles.secondaryButtonLabel]}
+            onPress={() => navigation.navigate('Diagnostics')}>
+            RUN DIAGNOSTICS
+          </Button>
+
         </View>
 
         <View style={styles.footer}>
@@ -134,6 +143,14 @@ const styles = StyleSheet.create({
     width: '100%',
     maxWidth: 340,
     borderRadius: 6,
+  },
+
+  secondaryButton: {
+    marginTop: 12,
+  },
+
+  secondaryButtonLabel: {
+    fontWeight: '900',
   },
 
   buttonContent: {

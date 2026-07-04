@@ -6,6 +6,7 @@ import { RootStackParamList } from './types';
 import { HomeScreen } from '../screens/Home';
 import { SettingsScreen } from '../screens/Settings';
 import { AboutScreen } from '../screens/About';
+import { DiagnosticsScreen } from '../screens/Diagnostics';
 
 import { ViewerScreen } from '../screens/Viewer';
 
@@ -27,6 +28,10 @@ export const RootNavigator = () => {
       <Stack.Screen
         name="Viewer"
         component={ViewerScreen}
+      />
+      <Stack.Screen
+        name="Diagnostics"
+        component={DiagnosticsScreen}
       />
 
       <Stack.Screen
