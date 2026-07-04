@@ -7,7 +7,7 @@ import { HomeScreen } from '../screens/Home';
 import { SettingsScreen } from '../screens/Settings';
 import { AboutScreen } from '../screens/About';
 
-import { ViewerScreen } from '../screens/Viewer/ViewerScreen';
+import { ViewerScreen } from '../screens/Viewer';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
