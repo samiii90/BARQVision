@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import { Text, Button, Appbar, useTheme } from 'react-native-paper';
+import { Text, Button, Appbar, Chip, useTheme } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import { RootNavigationProp } from '../../navigation/types';
 
@@ -17,22 +17,42 @@ export const HomeScreen = () => {
       </Appbar.Header>
 
       <View style={styles.content}>
-        <Text variant="displayMedium" style={[styles.title, { color: theme.colors.onBackground }]}>
-          BARQ CAM
-        </Text>
-        <Text variant="titleMedium" style={[styles.subtitle, { color: theme.colors.onBackground }]}>
-          Ready to Connect
-        </Text>
+        <View style={styles.headerSection}>
+          <Text variant="displayLarge" style={[styles.title, { color: theme.colors.onBackground }]}>
+            BARQ CAM
+          </Text>
+          <Text variant="titleMedium" style={[styles.subtitle, { color: theme.colors.onSurfaceVariant }]}>
+            Ready to Connect
+          </Text>
+          <Chip 
+            mode="flat" 
+            style={[styles.statusChip, { backgroundColor: theme.colors.surfaceVariant }]}
+            textStyle={{ color: theme.colors.onSurfaceVariant, fontWeight: 'bold' }}
+            compact
+          >
+            Offline
+          </Chip>
+        </View>
 
-        <Button
-          mode="contained"
-          onPress={() => {}}
-          style={styles.button}
-          contentStyle={styles.buttonContent}
-          labelStyle={styles.buttonLabel}
-        >
-          CONNECT CAMERA
-        </Button>
+        <View style={styles.actionSection}>
+          <Button
+            mode="contained"
+            onPress={() => {}}
+            style={styles.button}
+            contentStyle={styles.buttonContent}
+            labelStyle={styles.buttonLabel}
+            buttonColor={theme.colors.primary}
+            textColor={theme.colors.onPrimary}
+          >
+            CONNECT CAMERA
+          </Button>
+        </View>
+
+        <View style={styles.footerSection}>
+          <Text variant="labelMedium" style={[styles.footerText, { color: theme.colors.onSurfaceVariant }]}>
+            Powered by BARQ Vision
+          </Text>
+        </View>
       </View>
     </View>
   );
@@ -44,19 +64,34 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
     padding: 24,
   },
+  headerSection: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    paddingBottom: 48,
+  },
   title: {
-    fontWeight: 'bold',
+    fontWeight: '900',
+    letterSpacing: 2,
     marginBottom: 8,
+    textAlign: 'center',
   },
   subtitle: {
-    marginBottom: 48,
+    letterSpacing: 1,
+    marginBottom: 16,
+  },
+  statusChip: {
+    borderRadius: 8, // slightly squared for military feel
+  },
+  actionSection: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   button: {
-    borderRadius: 8,
+    borderRadius: 4, // sharp/industrial feel
     width: '100%',
     maxWidth: 320,
   },
@@ -65,6 +100,17 @@ const styles = StyleSheet.create({
   },
   buttonLabel: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: '900',
+    letterSpacing: 1.5,
+  },
+  footerSection: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    paddingBottom: 16,
+  },
+  footerText: {
+    letterSpacing: 1,
+    textTransform: 'uppercase',
   },
 });
