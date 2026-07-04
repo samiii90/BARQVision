@@ -1,12 +1,40 @@
-import React from 'react';
+import React, { useMemo, useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Text, Button, Appbar, Chip, useTheme } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import { RootNavigationProp } from '../../navigation/types';
+import { CameraService, CameraConnectionState } from '../../services/camera';
+import { MjpegViewer } from '../../components/camera';
 
 export const HomeScreen = () => {
   const theme = useTheme();
   const navigation = useNavigation<RootNavigationProp>();
+
+  const cameraService = useMemo(() => new CameraService(), []);
+  const [status, setStatus] = useState(cameraService.getStatus());
+
+  const handleConnect = async () => {
+    const connectPromise = cameraService.connect();
+    setStatus(cameraService.getStatus());
+    await connectPromise;
+    setStatus(cameraService.getStatus());
+  };
+
+  const getStatusText = () => {
+    switch (status.state) {
+      case CameraConnectionState.Idle:
+        return 'Offline';
+      case CameraConnectionState.Connecting:
+        return 'Connecting...';
+      case CameraConnectionState.Connected:
+        return 'Connected';
+      default:
+        return 'Offline';
+    }
+  };
+
+  const isConnected = status.state === CameraConnectionState.Connected;
+  const isConnecting = status.state === CameraConnectionState.Connecting;
 
   return (
     <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
@@ -30,22 +58,27 @@ export const HomeScreen = () => {
             textStyle={{ color: theme.colors.onSurfaceVariant, fontWeight: 'bold' }}
             compact
           >
-            Offline
+            {getStatusText()}
           </Chip>
         </View>
 
         <View style={styles.actionSection}>
-          <Button
-            mode="contained"
-            onPress={() => {}}
-            style={styles.button}
-            contentStyle={styles.buttonContent}
-            labelStyle={styles.buttonLabel}
-            buttonColor={theme.colors.primary}
-            textColor={theme.colors.onPrimary}
-          >
-            CONNECT CAMERA
-          </Button>
+          {isConnected ? (
+            <MjpegViewer streamUrl={cameraService.getStreamUrl()} />
+          ) : (
+            <Button
+              mode="contained"
+              onPress={handleConnect}
+              disabled={isConnecting}
+              style={styles.button}
+              contentStyle={styles.buttonContent}
+              labelStyle={styles.buttonLabel}
+              buttonColor={theme.colors.primary}
+              textColor={theme.colors.onPrimary}
+            >
+              CONNECT CAMERA
+            </Button>
+          )}
         </View>
 
         <View style={styles.footerSection}>
@@ -83,15 +116,16 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   statusChip: {
-    borderRadius: 8, // slightly squared for military feel
+    borderRadius: 8,
   },
   actionSection: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    width: '100%',
   },
   button: {
-    borderRadius: 4, // sharp/industrial feel
+    borderRadius: 4,
     width: '100%',
     maxWidth: 320,
   },
