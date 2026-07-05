@@ -19,16 +19,19 @@ export function VideoFeedSurface({
     <WebView
       source={{ uri: STREAM_URL }}
       originWhitelist={['*']}
-      javaScriptEnabled
-      domStorageEnabled
+      javaScriptEnabled={true}
+      domStorageEnabled={true}
       cacheEnabled={false}
-      allowsInlineMediaPlayback
+      allowsInlineMediaPlayback={true}
       mediaPlaybackRequiresUserAction={false}
       mixedContentMode="always"
       allowingReadAccessToURL={STREAM_URL}
       onLoadStart={onLoadStart}
       onLoadEnd={onLoadEnd}
-      onError={onError}
+      onError={(e) => {
+        console.log('WEBVIEW ERROR', e.nativeEvent);
+        onError?.();
+      }}
       style={StyleSheet.absoluteFill}
     />
   );
