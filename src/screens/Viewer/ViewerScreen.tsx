@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
   },
 
   loading: {
-    ...StyleSheet.absoluteFillObject,
+    ...StyleSheet.absoluteFill,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'black',
@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
   },
 
   overlay: {
-    ...StyleSheet.absoluteFillObject,
+    ...StyleSheet.absoluteFill,
     justifyContent: 'space-between',
     padding: 24,
   },

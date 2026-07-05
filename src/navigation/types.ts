@@ -2,6 +2,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 export type RootStackParamList = {
   Home: undefined;
+  GroundStation: undefined;
   Viewer: undefined;
   Diagnostics: undefined;
   Settings: undefined;

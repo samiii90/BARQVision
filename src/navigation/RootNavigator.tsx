@@ -7,6 +7,7 @@ import { HomeScreen } from '../screens/Home';
 import { SettingsScreen } from '../screens/Settings';
 import { AboutScreen } from '../screens/About';
 import { DiagnosticsScreen } from '../screens/Diagnostics';
+import { GroundStationScreen } from '../screens/GroundStationScreen';
 
 import { ViewerScreen } from '../screens/Viewer';
 
@@ -23,6 +24,11 @@ export const RootNavigator = () => {
       <Stack.Screen
         name="Home"
         component={HomeScreen}
+      />
+
+      <Stack.Screen
+        name="GroundStation"
+        component={GroundStationScreen}
       />
 
       <Stack.Screen

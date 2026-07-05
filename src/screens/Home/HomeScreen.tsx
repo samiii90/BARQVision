@@ -65,7 +65,7 @@ export const HomeScreen = () => {
             style={styles.button}
             contentStyle={styles.buttonContent}
             labelStyle={styles.buttonLabel}
-            onPress={() => navigation.navigate('Viewer')}>
+            onPress={() => navigation.navigate('GroundStation')}>
             CONNECT
           </Button>
 
